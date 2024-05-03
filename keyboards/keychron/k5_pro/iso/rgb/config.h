@@ -39,6 +39,9 @@
 /* Indication led */
 #    define NUM_LOCK_INDEX 37    // NumLock
 #    define LOW_BAT_IND_INDEX 99 // Space
+#    define SCROLL_LOCK_INDEX 14 // ScrollLock
+#    define CAPS_LOCK_INDEX 61   // CapsLock
+#    define NKRO_LOCK_INDEX 0    // NKRO indicator
 
 /* RGB Matrix Animation modes. Explicitly enabled
  * For full list of effects, see:
