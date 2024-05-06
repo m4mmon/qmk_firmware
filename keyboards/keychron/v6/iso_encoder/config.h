@@ -45,3 +45,9 @@
 
 /* Enable NKRO_LOCK_LED_INDEX */
 #define NKRO_LOCK_LED_INDEX 0
+
+/* RBG default color */
+/* max brightness green (85, 255, 255) */
+#    define RGB_MATRIX_DEFAULT_HUE 85
+#    define RGB_MATRIX_DEFAULT_SAT 255
+#    define RGB_MATRIX_DEFAULT_VAL 255
