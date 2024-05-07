@@ -35,7 +35,7 @@
             "animation": "solid_reactive_simple"
         }
         "layout": [
-            {"matrix":[0, 0],  "flags":1, "x":0,   "y":0},
+            {"matrix":[0, 0],  "flags":8, "x":0,   "y":0},
             {"matrix":[0, 1],  "flags":1, "x":21,  "y":0},
             {"matrix":[0, 2],  "flags":1, "x":32,  "y":0},
             {"matrix":[0, 3],  "flags":1, "x":42,  "y":0},
@@ -49,7 +49,7 @@
             {"matrix":[0, 11], "flags":1, "x":137, "y":0},
             {"matrix":[0, 12], "flags":1, "x":148, "y":0},
             {"matrix":[0, 14], "flags":4, "x":160, "y":0},
-            {"matrix":[0, 15], "flags":4, "x":170, "y":0},
+            {"matrix":[0, 15], "flags":8, "x":170, "y":0},
             {"matrix":[0, 16], "flags":4, "x":181, "y":0},
             {"matrix":[0, 17], "flags":4, "x":192, "y":0},
             {"matrix":[0, 18], "flags":4, "x":203, "y":0},
