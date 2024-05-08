@@ -39,6 +39,15 @@
 /* Indication led */
 #    define NUM_LOCK_INDEX 37    // NumLock
 #    define LOW_BAT_IND_INDEX 99 // Space
+#    define SCROLL_LOCK_INDEX 14 // ScrollLock
+#    define CAPS_LOCK_INDEX 61   // CapsLock
+#    define NKRO_LOCK_INDEX 0    // CapsLock
+
+/* RBG default color */
+/* max brightness green (85, 255, 255) */
+#    define RGB_MATRIX_DEFAULT_HUE 85
+#    define RGB_MATRIX_DEFAULT_SAT 255
+#    define RGB_MATRIX_DEFAULT_VAL 255
 
 /* RGB Matrix Animation modes. Explicitly enabled
  * For full list of effects, see:

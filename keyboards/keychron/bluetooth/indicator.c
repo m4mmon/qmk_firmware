@@ -452,7 +452,7 @@ void indicator_battery_low(void) {
 
             /*  Restore backligth state */
             if ((bat_low_ind_state & 0x0F) > (LOW_BAT_LED_BLINK_TIMES)) {
-#    if defined(NUM_LOCK_INDEX) || defined(CAPS_LOCK_INDEX) || defined(SCROLL_LOCK_INDEX) || defined(COMPOSE_LOCK_INDEX) || defined(KANA_LOCK_INDEX)
+#    if defined(NUM_LOCK_INDEX) || defined(CAPS_LOCK_INDEX) || defined(SCROLL_LOCK_INDEX) || defined(COMPOSE_LOCK_INDEX) || defined(KANA_LOCK_INDEX) || defined(NKRO_LOCK_INDEX)
                 if (LED_DRIVER_ALLOW_SHUTDOWN())
 #    endif
                     indicator_disable();
@@ -504,6 +504,11 @@ __attribute__((weak)) void os_state_indicate(void) {
 #    if defined(KANA_LOCK_INDEX)
     if (host_keyboard_led_state().kana) {
         SET_LED_ON(KANA_LOCK_INDEX);
+    }
+#    endif
+#    if defined(NKRO_LOCK_INDEX)
+    if (keymap_config.nkro) {
+        SET_LED_ON(NKRO_LOCK_INDEX);
     }
 #    endif
 }
@@ -599,6 +604,9 @@ bool LED_DRIVER_ALLOW_SHUTDOWN(void) {
 #        endif
 #        if defined(KANA_LOCK_INDEX)
     if (host_keyboard_led_state().kana) return false;
+#        endif
+#        if defined(KANA_LOCK_INDEX)
+    if (keymap_config.nkro) return false;
 #        endif
     return true;
 }
