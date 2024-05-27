@@ -605,7 +605,7 @@ bool LED_DRIVER_ALLOW_SHUTDOWN(void) {
 #        if defined(KANA_LOCK_INDEX)
     if (host_keyboard_led_state().kana) return false;
 #        endif
-#        if defined(KANA_LOCK_INDEX)
+#        if defined(NKRO_LOCK_INDEX)
     if (keymap_config.nkro) return false;
 #        endif
     return true;
