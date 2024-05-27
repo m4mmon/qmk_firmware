@@ -41,7 +41,7 @@
 #    define LOW_BAT_IND_INDEX 99 // Space
 #    define SCROLL_LOCK_INDEX 14 // ScrollLock
 #    define CAPS_LOCK_INDEX 61   // CapsLock
-#    define NKRO_LOCK_INDEX 0    // CapsLock
+#    define NKRO_LOCK_INDEX 0    // NKRO Lock
 
 /* RBG default color */
 /* max brightness green (85, 255, 255) */
