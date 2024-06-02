@@ -51,9 +51,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [WIN_FN] = LAYOUT_109_iso(
         _______,            KC_BRID,  KC_BRIU,  KC_TASK,  KC_FILE,  RGB_VAD,  RGB_VAI,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU, _______,  _______,  _______, _______, _______, _______, _______,
-        _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______, _______,  _______,  _______, _______, _______, _______, _______,
+        _______,  BT_HST1,  BT_HST2,  BT_HST3,  _______,  _______,  _______,  _______,  _______,  EE_CLR,   DB_TOGG,  QK_BOOT,  QK_RBT,   _______, _______,  _______,  _______, _______, _______, _______, _______,
         RGB_TOG,  RGB_MOD,  RGB_VAI,  RGB_HUI,  RGB_SAI,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,  _______,           _______,  _______,  _______, _______, _______, _______, _______,
         _______,  RGB_RMOD, RGB_VAD,  RGB_HUD,  RGB_SAD,  RGB_SPD,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,                              _______, _______, _______,
         _______,  _______,  _______,  _______,  _______,  _______,  BAT_LVL,  NK_TOGG,  _______,  _______,  _______,  _______,            _______,           _______,           _______, _______, _______, _______,
         _______,  _______,  _______,                                _______,                                _______,  KC_RWIN,  _______,  _______, _______,  _______,  _______, _______,          _______        ),
 };
+
+// -----------------------------------------------------------------------------
+
+void keyboard_post_init_user(void) {
+#ifdef CONSOLE_ENABLE
+   debug_enable = true;
+#endif
+}
+
+// -----------------------------------------------------------------------------
+
+void housekeeping_task_user() {
+
+}
+
+// -----------------------------------------------------------------------------
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+#ifdef CONSOLE_ENABLE
+   uprintf(
+      "process_record_user: kc: 0x%04X, col: %2u, row: %2u, pressed: %u, time: %5u, int: %u, count: %u\n",
+      keycode,
+      record->event.key.col,
+      record->event.key.row,
+      record->event.pressed,
+      record->event.time,
+      record->tap.interrupted,
+      record->tap.count
+   );
+#endif
+   return true;
+}
+
+// -----------------------------------------------------------------------------
