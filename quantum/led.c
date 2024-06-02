@@ -173,13 +173,16 @@ void led_wakeup(void) {
  *
  * Only sets state if change detected
  */
+ #include "keycode_config.h"
 void led_task(void) {
     static uint8_t last_led_status = 0;
+    static bool last_nkro_status = false;
 
     // update LED
     uint8_t led_status = host_keyboard_leds();
-    if (last_led_status != led_status) {
+    if (last_led_status != led_status || last_nkro_status != keymap_config.nkro) {
         last_led_status            = led_status;
+        last_nkro_status           = keymap_config.nkro;
         last_led_modification_time = timer_read32();
 
         if (debug_keyboard) {
