@@ -204,7 +204,10 @@ bool led_matrix_indicators_user(void) {
 #endif
 
 #ifdef RGB_MATRIX_ENABLE
-bool rgb_matrix_indicators_user(void) {
+bool rgb_matrix_indicators_keychron(void) {
+    if (!rgb_matrix_indicators_user()) {
+        return false;
+    }
     if (factory_reset_ind_state) {
         backlight_test_mode = BACKLIGHT_TEST_OFF;
         rgb_matrix_set_color_all(factory_reset_ind_state % 2 ? 0 : 255, 0, 0);
@@ -325,7 +328,7 @@ void factory_test_rx(uint8_t *data, uint8_t length) {
     }
 }
 
-bool dip_switch_update_user(uint8_t index, bool active) {
+bool dip_switch_update_keychron(uint8_t index, bool active) {
     if (report_os_sw_state) {
 #ifdef INVERT_OS_SWITCH_STATE
         active = !active;
