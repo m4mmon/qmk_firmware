@@ -316,7 +316,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
 
 void housekeeping_task_user()
 {
-
 }
 
 bool rgb_matrix_indicators_user()
@@ -332,6 +331,7 @@ bool rgb_matrix_indicators_user()
       register_code(KC_NUM_LOCK);
       unregister_code(KC_NUM_LOCK);
    }
+
    return true;
 }
 
@@ -348,9 +348,39 @@ bool dip_switch_update_user(uint8_t index, bool active)
     );
 
 #endif
-    bDipSwitchState = active;
+   if (index == 0)
+   {
+      if (active && !bDipSwitchState)
+      {
+         bDipSwitchState = active;
 
-    return false;
+         // if numlock not active
+
+         if (!host_keyboard_led_state().num_lock)
+         {
+            // tell OS to switch on numlock
+
+            register_code(KC_NUM_LOCK);
+            unregister_code(KC_NUM_LOCK);
+         }
+
+         // force led indicators update
+
+         led_wakeup();
+      }
+      else if (!active && bDipSwitchState)
+      {
+         bDipSwitchState = active;
+
+         // force led indicators update
+
+         led_wakeup();
+      }
+
+      return false;
+   }
+
+   return true;
 }
 
 // -----------------------------------------------------------------------------
@@ -358,18 +388,34 @@ bool dip_switch_update_user(uint8_t index, bool active)
 #if defined(LED_MATRIX_ENABLE) || defined(RGB_MATRIX_ENABLE)
 
 #define SET_LED_ON(idx) rgb_matrix_set_color(idx, rgbIndicator.r, rgbIndicator.g, rgbIndicator.b)
+#define SET_LED_OFF(idx) rgb_matrix_set_color(idx, 0, 0, 0)
 
 void os_state_indicate(void)
 {
 #if defined(NUM_LOCK_INDEX) || defined(CAPS_LOCK_INDEX) || defined(SCROLL_LOCK_INDEX) || defined(COMPOSE_LOCK_INDEX) || defined(KANA_LOCK_INDEX) || defined(NKRO_LOCK_INDEX)
    static RGB rgbIndicator;
    getIndicatorRGB(&rgbIndicator);
+#if 0
+
+    DPRINT(
+        "os_state_indicate(%d, %d, %d) num_lock=%s bDipSwitchState=%s\n",
+        rgbIndicator.r,
+        rgbIndicator.g,
+        rgbIndicator.b,
+        host_keyboard_led_state().num_lock ? "YES" : "NO",
+        bDipSwitchState ? "YES" : "NO"
+    );
+#endif
 #endif
 #if defined(NUM_LOCK_INDEX)
 
     if (!bDipSwitchState && host_keyboard_led_state().num_lock)
     {
         SET_LED_ON(NUM_LOCK_INDEX);
+    }
+    else if (bDipSwitchState)
+    {
+        //SET_LED_OFF(NUM_LOCK_INDEX);
     }
 #endif
 #if defined(CAPS_LOCK_INDEX)

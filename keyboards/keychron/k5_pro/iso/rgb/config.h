@@ -16,8 +16,6 @@
 
 #pragma once
 
-#define RGBLIGHT_SLEEP
-
 #undef DYNAMIC_KEYMAP_LAYER_COUNT
 #define DYNAMIC_KEYMAP_LAYER_COUNT 2
 
